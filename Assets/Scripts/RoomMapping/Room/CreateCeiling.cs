@@ -18,7 +18,7 @@ namespace SpatialAnchor
         private OVRCameraRig ovrCameraRig;
         private Transform rightController;
 
-        void Awake()
+        void OnEnable()
         {
             position = floor.transform.position;
             transform.position = position;

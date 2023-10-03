@@ -4,43 +4,48 @@ using UnityEngine;
 
 namespace SpatialAnchor
 {
-    public class CreateFurnitureFloor : MonoBehaviour
+    public class CreateFloor : MonoBehaviour
     {
-        [SerializeField] CreateRoom room;
-        [SerializeField] CreateFurniture parent;
+        [SerializeField] CreateRoom parent;
         [SerializeField] GameObject pointPrefab;
         [SerializeField] GameObject rayPrefab;
 
         private bool _onFloor;
-        private float _lerpSpeed = 3.5f;
+        private float _maxCastDistance = 6f;
+        private Vector3 roomAnchor;
         private OVRCameraRig ovrCameraRig;
         private Transform rightController;
+        private Plane floor;
         private GameObject point;
         private GameObject ray;
         private LineRenderer rayRenderer;
 
-        void Awake()
+        void OnEnable()
         {
             _onFloor = false;
 
+            floor = new Plane(Vector3.up, RoomAnchor.Instance.transform.position);
+
             ovrCameraRig = FindObjectOfType<OVRCameraRig>();
             rightController = ovrCameraRig.rightControllerAnchor;
-
             point = Instantiate(pointPrefab, transform.position, transform.rotation);
+
             ray = Instantiate(rayPrefab, transform.position, Quaternion.identity);
             rayRenderer = ray.GetComponent<LineRenderer>();
+            rayRenderer.SetPosition(0, transform.position);
+            rayRenderer.SetPosition(1, transform.position);
         }
 
         // Update is called once per frame
         void Update()
         {
+            float castDistance;
             Ray castRay = new Ray(rightController.position, rightController.forward);
-            RaycastHit hit;
 
-            if (Physics.Raycast(castRay, out hit))
+            if (floor.Raycast(castRay, out castDistance))
             {
-                _onFloor = (hit.collider.gameObject == room.Floor);
-                point.SetActive(hit.collider.gameObject == room.Floor);
+                _onFloor = true;
+                point.SetActive(true);
             }
             else
             {
@@ -48,11 +53,17 @@ namespace SpatialAnchor
                 point.SetActive(false);
             }
 
+            //clamp:
+            if (castDistance <= 0 || castDistance > _maxCastDistance)
+            {
+                castDistance = _maxCastDistance;
+            }
+
             //position (force to floor):
-            Vector3 position = hit.point;
+            Vector3 position = castRay.GetPoint(castDistance);
             if (_onFloor)
             {
-                position.y = RoomAnchor.Instance.transform.position.y;
+                position.y = roomAnchor.y;
             }
             transform.position = position;
             point.transform.position = transform.position;
@@ -63,12 +74,12 @@ namespace SpatialAnchor
             if (_onFloor)
             {
                 Vector3 flatForward = Vector3.ProjectOnPlane(rightController.forward, Vector3.up);
-                transform.rotation = Quaternion.Slerp(transform.rotation, Quaternion.LookRotation(flatForward), Time.deltaTime * _lerpSpeed);
+                transform.rotation = Quaternion.LookRotation(flatForward);
             }
             else
             {
                 Quaternion rotation = Quaternion.LookRotation(rightController.forward);
-                transform.rotation = Quaternion.Slerp(transform.rotation, rotation, Time.deltaTime * _lerpSpeed);
+                transform.rotation = rotation;
             }
 
             if (OVRInput.GetDown(OVRInput.Button.PrimaryIndexTrigger, OVRInput.Controller.RTouch))

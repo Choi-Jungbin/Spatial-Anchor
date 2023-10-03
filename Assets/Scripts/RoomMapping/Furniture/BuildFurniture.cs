@@ -12,7 +12,7 @@ namespace SpatialAnchor
 
         public GameObject furniture;
 
-        void Awake()
+        void OnEnable()
         {
             furniture = new GameObject("(Furniture)");
             furniture.transform.SetParent(parent.transform);

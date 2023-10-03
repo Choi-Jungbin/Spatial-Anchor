@@ -1,7 +1,6 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
-using UnityEngine.UI;
 
 namespace SpatialAnchor
 {
@@ -9,13 +8,14 @@ namespace SpatialAnchor
     {
         [SerializeField] GameObject rayPrefab;
 
-        private bool _onButton;
-        private OVRCameraRig ovrCameraRig;
-        private Transform rightController;
-        private GameObject ray;
-        private LineRenderer rayRenderer;
+        protected bool _onButton;
+        protected OVRCameraRig ovrCameraRig;
+        protected Transform rightController;
+        protected GameObject ray;
+        protected LineRenderer rayRenderer;
+        protected RaycastHit hit;
 
-        void Awake()
+        protected void OnEnable()
         {
             _onButton = false;
 
@@ -24,38 +24,35 @@ namespace SpatialAnchor
 
             ray = Instantiate(rayPrefab, transform.position, Quaternion.identity);
             rayRenderer = ray.GetComponent<LineRenderer>();
-            rayRenderer.SetPosition(0, transform.position);
+            rayRenderer.SetPosition(0, rightController.position);
             rayRenderer.SetPosition(1, transform.position);
         }
 
         // Update is called once per frame
-        void Update()
+        protected void Update()
         {
             Ray castRay = new Ray(rightController.position, rightController.forward);
-            RaycastHit hit;
 
             if (Physics.Raycast(castRay, out hit))
             {
+                transform.position = hit.point;
                 if (hit.collider.gameObject.CompareTag("Button"))
                 {
                     _onButton = true;
-                    transform.position = hit.point;
+                }
+                else
+                {
+                    _onButton = false;
                 }
             }
             else
             {
+                _onButton = false;
                 transform.position = castRay.origin + rightController.forward * 4f;
             }
+
             rayRenderer.SetPosition(0, castRay.origin);
             rayRenderer.SetPosition(1, transform.position);
-
-            if (OVRInput.GetDown(OVRInput.Button.PrimaryIndexTrigger, OVRInput.Controller.RTouch))
-            {
-                if (_onButton)
-                {
-                    hit.collider.gameObject.GetComponent<Button>().onClick.Invoke();
-                }
-            }
         }
     }
 }

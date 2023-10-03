@@ -37,17 +37,42 @@ namespace SpatialAnchor
             childObj[0].SetActive(true);
         }
 
-        public void ChildTriggered(int child)
+        public void DestroyRoom()
+        {
+            //sets:
+            corners = new List<Vector3>();
+
+            //destroy:
+            Destroy(Ceiling);
+            Destroy(Floor);
+            foreach (var wall in Walls)
+            {
+                Destroy(wall);
+            }
+
+            Walls = new List<GameObject>();
+        }
+
+        public void ChildTriggered(int child, bool redo = false)
         {
             childObj[child].SetActive(false);
-            if (child < childObj.Count)
+            if (child < childObj.Count-1)
             {
                 childObj[child + 1].SetActive(true);
             }
-            else
+            else if(child == childObj.Count-1)
             {
-                CreateFurniture createFurniture = FindFirstObjectByType<CreateFurniture>();
-                createFurniture.gameObject.SetActive(true);
+                if (redo)
+                {
+                    DestroyRoom();
+                    childObj[0].SetActive(true);
+                }
+                else
+                {
+                    CreateFurniture createFurniture = FindFirstObjectByType<CreateFurniture>();
+                    createFurniture.gameObject.SetActive(true);
+                    gameObject.SetActive(false);
+                }
             }
         }
     }
