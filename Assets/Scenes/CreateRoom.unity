@@ -123,6 +123,177 @@ NavMeshSettings:
     debug:
       m_Flags: 0
   m_NavMeshData: {fileID: 0}
+--- !u!1 &104145162
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 104145165}
+  - component: {fileID: 104145164}
+  - component: {fileID: 104145163}
+  m_Layer: 0
+  m_Name: Text (TMP)
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!114 &104145163
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 104145162}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 9541d86e2fd84c1d9990edf0852d74ab, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  m_Material: {fileID: 0}
+  m_Color: {r: 1, g: 1, b: 1, a: 1}
+  m_RaycastTarget: 1
+  m_RaycastPadding: {x: 0, y: 0, z: 0, w: 0}
+  m_Maskable: 1
+  m_OnCullStateChanged:
+    m_PersistentCalls:
+      m_Calls: []
+  m_text: Furniture
+  m_isRightToLeft: 0
+  m_fontAsset: {fileID: 11400000, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
+  m_sharedMaterial: {fileID: 2180264, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
+  m_fontSharedMaterials: []
+  m_fontMaterial: {fileID: 0}
+  m_fontMaterials: []
+  m_fontColor32:
+    serializedVersion: 2
+    rgba: 4294967295
+  m_fontColor: {r: 1, g: 1, b: 1, a: 1}
+  m_enableVertexGradient: 0
+  m_colorMode: 3
+  m_fontColorGradient:
+    topLeft: {r: 1, g: 1, b: 1, a: 1}
+    topRight: {r: 1, g: 1, b: 1, a: 1}
+    bottomLeft: {r: 1, g: 1, b: 1, a: 1}
+    bottomRight: {r: 1, g: 1, b: 1, a: 1}
+  m_fontColorGradientPreset: {fileID: 0}
+  m_spriteAsset: {fileID: 0}
+  m_tintAllSprites: 0
+  m_StyleSheet: {fileID: 0}
+  m_TextStyleHashCode: -1183493901
+  m_overrideHtmlColors: 0
+  m_faceColor:
+    serializedVersion: 2
+    rgba: 4294967295
+  m_fontSize: 36
+  m_fontSizeBase: 36
+  m_fontWeight: 400
+  m_enableAutoSizing: 0
+  m_fontSizeMin: 18
+  m_fontSizeMax: 72
+  m_fontStyle: 0
+  m_HorizontalAlignment: 1
+  m_VerticalAlignment: 256
+  m_textAlignment: 65535
+  m_characterSpacing: 0
+  m_wordSpacing: 0
+  m_lineSpacing: 0
+  m_lineSpacingMax: 0
+  m_paragraphSpacing: 0
+  m_charWidthMaxAdj: 0
+  m_enableWordWrapping: 1
+  m_wordWrappingRatios: 0.4
+  m_overflowMode: 0
+  m_linkedTextComponent: {fileID: 0}
+  parentLinkedComponent: {fileID: 0}
+  m_enableKerning: 1
+  m_enableExtraPadding: 0
+  checkPaddingRequired: 0
+  m_isRichText: 1
+  m_parseCtrlCharacters: 1
+  m_isOrthographic: 0
+  m_isCullingEnabled: 0
+  m_horizontalMapping: 0
+  m_verticalMapping: 0
+  m_uvLineOffset: 0
+  m_geometrySortingOrder: 0
+  m_IsTextObjectScaleStatic: 0
+  m_VertexBufferAutoSizeReduction: 0
+  m_useMaxVisibleDescender: 1
+  m_pageToDisplay: 1
+  m_margin: {x: 0, y: 0, z: 0, w: 0}
+  m_isUsingLegacyAnimationComponent: 0
+  m_isVolumetricText: 0
+  _SortingLayer: 0
+  _SortingLayerID: 0
+  _SortingOrder: 0
+  m_hasFontAssetChanged: 0
+  m_renderer: {fileID: 104145164}
+  m_maskType: 0
+--- !u!23 &104145164
+MeshRenderer:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 104145162}
+  m_Enabled: 1
+  m_CastShadows: 0
+  m_ReceiveShadows: 0
+  m_DynamicOccludee: 1
+  m_StaticShadowCaster: 0
+  m_MotionVectors: 1
+  m_LightProbeUsage: 1
+  m_ReflectionProbeUsage: 1
+  m_RayTracingMode: 2
+  m_RayTraceProcedural: 0
+  m_RenderingLayerMask: 1
+  m_RendererPriority: 0
+  m_Materials:
+  - {fileID: 2180264, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
+  m_StaticBatchInfo:
+    firstSubMesh: 0
+    subMeshCount: 0
+  m_StaticBatchRoot: {fileID: 0}
+  m_ProbeAnchor: {fileID: 0}
+  m_LightProbeVolumeOverride: {fileID: 0}
+  m_ScaleInLightmap: 1
+  m_ReceiveGI: 1
+  m_PreserveUVs: 0
+  m_IgnoreNormalsForChartDetection: 0
+  m_ImportantGI: 0
+  m_StitchLightmapSeams: 1
+  m_SelectedEditorRenderState: 3
+  m_MinimumChartSize: 4
+  m_AutoUVMaxDistance: 0.5
+  m_AutoUVMaxAngle: 89
+  m_LightmapParameters: {fileID: 0}
+  m_SortingLayerID: 0
+  m_SortingLayer: 0
+  m_SortingOrder: 0
+  m_AdditionalVertexStreams: {fileID: 0}
+--- !u!224 &104145165
+RectTransform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 104145162}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 844962735}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+  m_AnchorMin: {x: 0.5, y: 0.5}
+  m_AnchorMax: {x: 0.5, y: 0.5}
+  m_AnchoredPosition: {x: 0, y: 0}
+  m_SizeDelta: {x: 20, y: 5}
+  m_Pivot: {x: 0.5, y: 0.5}
 --- !u!1001 &135044416
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -134,6 +305,10 @@ PrefabInstance:
     - target: {fileID: 896418994257368772, guid: 85e3251c4a134d241839370a47541952, type: 3}
       propertyPath: m_Name
       value: Menu
+      objectReference: {fileID: 0}
+    - target: {fileID: 896418994257368772, guid: 85e3251c4a134d241839370a47541952, type: 3}
+      propertyPath: m_Layer
+      value: 5
       objectReference: {fileID: 0}
     - target: {fileID: 2962440040351674633, guid: 85e3251c4a134d241839370a47541952, type: 3}
       propertyPath: m_LocalScale.x
@@ -191,9 +366,21 @@ PrefabInstance:
       propertyPath: m_Name
       value: Ok
       objectReference: {fileID: 0}
+    - target: {fileID: 3018923454161874545, guid: 85e3251c4a134d241839370a47541952, type: 3}
+      propertyPath: m_Layer
+      value: 5
+      objectReference: {fileID: 0}
+    - target: {fileID: 4159679261001070547, guid: 85e3251c4a134d241839370a47541952, type: 3}
+      propertyPath: m_Layer
+      value: 5
+      objectReference: {fileID: 0}
     - target: {fileID: 4928952529673882419, guid: 85e3251c4a134d241839370a47541952, type: 3}
       propertyPath: m_text
       value: Start Room Mapping!
+      objectReference: {fileID: 0}
+    - target: {fileID: 5448370268242882639, guid: 85e3251c4a134d241839370a47541952, type: 3}
+      propertyPath: m_Layer
+      value: 5
       objectReference: {fileID: 0}
     - target: {fileID: 6280056393431498384, guid: 85e3251c4a134d241839370a47541952, type: 3}
       propertyPath: m_text
@@ -220,7 +407,7 @@ GameObject:
   - component: {fileID: 160983480}
   - component: {fileID: 160983482}
   - component: {fileID: 160983481}
-  m_Layer: 0
+  m_Layer: 5
   m_Name: Text (TMP)
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -438,7 +625,7 @@ GameObject:
   m_Component:
   - component: {fileID: 241849649}
   - component: {fileID: 241849650}
-  m_Layer: 0
+  m_Layer: 5
   m_Name: Accept
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -486,7 +673,7 @@ GameObject:
   m_Component:
   - component: {fileID: 261484602}
   - component: {fileID: 261484603}
-  m_Layer: 0
+  m_Layer: 5
   m_Name: canvas
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -580,6 +767,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: Menu
       objectReference: {fileID: 0}
+    - target: {fileID: 896418994257368772, guid: 85e3251c4a134d241839370a47541952, type: 3}
+      propertyPath: m_Layer
+      value: 5
+      objectReference: {fileID: 0}
     - target: {fileID: 2499091310571009227, guid: 85e3251c4a134d241839370a47541952, type: 3}
       propertyPath: m_LocalPosition.x
       value: -2
@@ -632,9 +823,21 @@ PrefabInstance:
       propertyPath: m_Name
       value: Yes
       objectReference: {fileID: 0}
+    - target: {fileID: 3018923454161874545, guid: 85e3251c4a134d241839370a47541952, type: 3}
+      propertyPath: m_Layer
+      value: 5
+      objectReference: {fileID: 0}
+    - target: {fileID: 4159679261001070547, guid: 85e3251c4a134d241839370a47541952, type: 3}
+      propertyPath: m_Layer
+      value: 5
+      objectReference: {fileID: 0}
     - target: {fileID: 4928952529673882419, guid: 85e3251c4a134d241839370a47541952, type: 3}
       propertyPath: m_text
       value: Adding object?
+      objectReference: {fileID: 0}
+    - target: {fileID: 5448370268242882639, guid: 85e3251c4a134d241839370a47541952, type: 3}
+      propertyPath: m_Layer
+      value: 5
       objectReference: {fileID: 0}
     - target: {fileID: 6280056393431498384, guid: 85e3251c4a134d241839370a47541952, type: 3}
       propertyPath: m_text
@@ -757,7 +960,7 @@ GameObject:
   m_Component:
   - component: {fileID: 422474112}
   - component: {fileID: 422474113}
-  m_Layer: 0
+  m_Layer: 5
   m_Name: Line
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -894,7 +1097,7 @@ GameObject:
   - component: {fileID: 441242698}
   - component: {fileID: 441242700}
   - component: {fileID: 441242699}
-  m_Layer: 0
+  m_Layer: 5
   m_Name: Text (TMP)
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -1161,7 +1364,7 @@ GameObject:
   m_Component:
   - component: {fileID: 606288846}
   - component: {fileID: 606288847}
-  m_Layer: 0
+  m_Layer: 5
   m_Name: canvas
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -1500,13 +1703,13 @@ GameObject:
   m_Component:
   - component: {fileID: 798255200}
   - component: {fileID: 798255201}
-  m_Layer: 0
+  m_Layer: 5
   m_Name: Accept
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!4 &798255200
 Transform:
   m_ObjectHideFlags: 0
@@ -1538,7 +1741,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   rayPrefab: {fileID: 1594910264152958254, guid: 7a7a1276dc8c790459a86e4155991e13, type: 3}
   parent: {fileID: 969280643}
-  text: {fileID: 1184919706}
+  line: {fileID: 422474113}
 --- !u!1 &844962734
 GameObject:
   m_ObjectHideFlags: 0
@@ -1575,6 +1778,7 @@ Transform:
   - {fileID: 711467144}
   - {fileID: 1452366305}
   - {fileID: 241849649}
+  - {fileID: 104145165}
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!114 &844962736
@@ -1589,6 +1793,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: e7266b6694d4d4f40a557aced777edd7, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  text: {fileID: 104145163}
   childObj: []
 --- !u!1 &919317347
 GameObject:
@@ -1650,6 +1855,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 8c1f34e54c215a5438ccd8e10b698404, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  createFurniture: {fileID: 844962736}
   corners: []
   childObj: []
 --- !u!4 &969280644
@@ -1715,7 +1921,7 @@ GameObject:
   m_Component:
   - component: {fileID: 1119982177}
   - component: {fileID: 1119982178}
-  m_Layer: 0
+  m_Layer: 5
   m_Name: Start
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -1891,6 +2097,10 @@ PrefabInstance:
       value: No
       objectReference: {fileID: 0}
     - target: {fileID: 919132149155446097, guid: 8aa864fb889d36c46b84a3f7bccece55, type: 3}
+      propertyPath: m_Layer
+      value: 5
+      objectReference: {fileID: 0}
+    - target: {fileID: 919132149155446097, guid: 8aa864fb889d36c46b84a3f7bccece55, type: 3}
       propertyPath: m_TagString
       value: Button
       objectReference: {fileID: 0}
@@ -1947,7 +2157,7 @@ GameObject:
   - component: {fileID: 1179624675}
   - component: {fileID: 1179624677}
   - component: {fileID: 1179624676}
-  m_Layer: 0
+  m_Layer: 5
   m_Name: Text (TMP)
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -2107,17 +2317,6 @@ MeshRenderer:
   m_SortingLayer: 0
   m_SortingOrder: 0
   m_AdditionalVertexStreams: {fileID: 0}
---- !u!114 &1184919706 stripped
-MonoBehaviour:
-  m_CorrespondingSourceObject: {fileID: 4928952529673882419, guid: 85e3251c4a134d241839370a47541952, type: 3}
-  m_PrefabInstance: {fileID: 1397123195}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 0}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 9541d86e2fd84c1d9990edf0852d74ab, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
 --- !u!1 &1247933720
 GameObject:
   m_ObjectHideFlags: 0
@@ -2128,7 +2327,7 @@ GameObject:
   m_Component:
   - component: {fileID: 1247933721}
   - component: {fileID: 1247933722}
-  m_Layer: 0
+  m_Layer: 5
   m_Name: canvas
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -2206,6 +2405,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: Menu
       objectReference: {fileID: 0}
+    - target: {fileID: 896418994257368772, guid: 85e3251c4a134d241839370a47541952, type: 3}
+      propertyPath: m_Layer
+      value: 5
+      objectReference: {fileID: 0}
     - target: {fileID: 2499091310571009227, guid: 85e3251c4a134d241839370a47541952, type: 3}
       propertyPath: m_LocalPosition.x
       value: -2
@@ -2258,9 +2461,21 @@ PrefabInstance:
       propertyPath: m_Name
       value: Yes
       objectReference: {fileID: 0}
+    - target: {fileID: 3018923454161874545, guid: 85e3251c4a134d241839370a47541952, type: 3}
+      propertyPath: m_Layer
+      value: 5
+      objectReference: {fileID: 0}
+    - target: {fileID: 4159679261001070547, guid: 85e3251c4a134d241839370a47541952, type: 3}
+      propertyPath: m_Layer
+      value: 5
+      objectReference: {fileID: 0}
     - target: {fileID: 4928952529673882419, guid: 85e3251c4a134d241839370a47541952, type: 3}
       propertyPath: m_text
       value: Accept object mapping?
+      objectReference: {fileID: 0}
+    - target: {fileID: 5448370268242882639, guid: 85e3251c4a134d241839370a47541952, type: 3}
+      propertyPath: m_Layer
+      value: 5
       objectReference: {fileID: 0}
     - target: {fileID: 6280056393431498384, guid: 85e3251c4a134d241839370a47541952, type: 3}
       propertyPath: m_text
@@ -2291,6 +2506,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: Menu
       objectReference: {fileID: 0}
+    - target: {fileID: 896418994257368772, guid: 85e3251c4a134d241839370a47541952, type: 3}
+      propertyPath: m_Layer
+      value: 5
+      objectReference: {fileID: 0}
     - target: {fileID: 2499091310571009227, guid: 85e3251c4a134d241839370a47541952, type: 3}
       propertyPath: m_LocalPosition.x
       value: -2
@@ -2347,9 +2566,21 @@ PrefabInstance:
       propertyPath: m_Name
       value: Yes
       objectReference: {fileID: 0}
+    - target: {fileID: 3018923454161874545, guid: 85e3251c4a134d241839370a47541952, type: 3}
+      propertyPath: m_Layer
+      value: 5
+      objectReference: {fileID: 0}
+    - target: {fileID: 4159679261001070547, guid: 85e3251c4a134d241839370a47541952, type: 3}
+      propertyPath: m_Layer
+      value: 5
+      objectReference: {fileID: 0}
     - target: {fileID: 4928952529673882419, guid: 85e3251c4a134d241839370a47541952, type: 3}
       propertyPath: m_text
       value: Accept room mapping?
+      objectReference: {fileID: 0}
+    - target: {fileID: 5448370268242882639, guid: 85e3251c4a134d241839370a47541952, type: 3}
+      propertyPath: m_Layer
+      value: 5
       objectReference: {fileID: 0}
     - target: {fileID: 6280056393431498384, guid: 85e3251c4a134d241839370a47541952, type: 3}
       propertyPath: m_text
@@ -2361,13 +2592,7 @@ PrefabInstance:
     - targetCorrespondingSourceObject: {fileID: 2962440040351674633, guid: 85e3251c4a134d241839370a47541952, type: 3}
       insertIndex: -1
       addedObject: {fileID: 1838326644}
-    m_AddedComponents:
-    - targetCorrespondingSourceObject: {fileID: 5448370268242882639, guid: 85e3251c4a134d241839370a47541952, type: 3}
-      insertIndex: -1
-      addedObject: {fileID: 0}
-    - targetCorrespondingSourceObject: {fileID: 4159679261001070547, guid: 85e3251c4a134d241839370a47541952, type: 3}
-      insertIndex: -1
-      addedObject: {fileID: 0}
+    m_AddedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 85e3251c4a134d241839370a47541952, type: 3}
 --- !u!4 &1397123196 stripped
 Transform:
@@ -2653,7 +2878,7 @@ GameObject:
   m_Component:
   - component: {fileID: 1719823044}
   - component: {fileID: 1719823045}
-  m_Layer: 0
+  m_Layer: 5
   m_Name: Start
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -2761,6 +2986,10 @@ PrefabInstance:
     - target: {fileID: 919132149155446097, guid: 8aa864fb889d36c46b84a3f7bccece55, type: 3}
       propertyPath: m_Name
       value: No
+      objectReference: {fileID: 0}
+    - target: {fileID: 919132149155446097, guid: 8aa864fb889d36c46b84a3f7bccece55, type: 3}
+      propertyPath: m_Layer
+      value: 5
       objectReference: {fileID: 0}
     - target: {fileID: 919132149155446097, guid: 8aa864fb889d36c46b84a3f7bccece55, type: 3}
       propertyPath: m_TagString
@@ -2886,6 +3115,10 @@ PrefabInstance:
       value: No
       objectReference: {fileID: 0}
     - target: {fileID: 919132149155446097, guid: 8aa864fb889d36c46b84a3f7bccece55, type: 3}
+      propertyPath: m_Layer
+      value: 5
+      objectReference: {fileID: 0}
+    - target: {fileID: 919132149155446097, guid: 8aa864fb889d36c46b84a3f7bccece55, type: 3}
       propertyPath: m_TagString
       value: Button
       objectReference: {fileID: 0}
@@ -2941,7 +3174,7 @@ GameObject:
   m_Component:
   - component: {fileID: 2041231702}
   - component: {fileID: 2041231703}
-  m_Layer: 0
+  m_Layer: 5
   m_Name: canvas
   m_TagString: Untagged
   m_Icon: {fileID: 0}

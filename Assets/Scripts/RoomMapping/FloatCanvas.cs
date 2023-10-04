@@ -14,7 +14,7 @@ public class FloatCanvas : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        transform.position = _mainCamera.transform.position + _mainCamera.transform.forward * 1.5f;
+        transform.position = _mainCamera.transform.position + _mainCamera.transform.forward * 2f;
         transform.rotation = Quaternion.LookRotation(_mainCamera.transform.forward);
     }
 }

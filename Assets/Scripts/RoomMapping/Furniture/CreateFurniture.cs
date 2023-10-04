@@ -37,7 +37,7 @@ namespace SpatialAnchor
                 {
                     childObj[child + 1].SetActive(true);
                 }
-                else
+                else if (child == childObj.Count - 1)
                 {
                     childObj[0].SetActive(true);
                 }

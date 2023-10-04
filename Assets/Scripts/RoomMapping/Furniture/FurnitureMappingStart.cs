@@ -30,14 +30,14 @@ namespace SpatialAnchor
             }
         }
 
-        public void NextScene()
-        {
-            parent.ChildTriggered(0, true);
-        }
-
         public void Next()
         {
             parent.ChildTriggered(0);
+        }
+
+        public void NextScene()
+        {
+            parent.ChildTriggered(0, true);
         }
     }
 }

@@ -8,6 +8,8 @@ namespace SpatialAnchor
     {
         [SerializeField] GameObject rayPrefab;
 
+        protected LayerMask layerMask;
+
         protected bool _onButton;
         protected OVRCameraRig ovrCameraRig;
         protected Transform rightController;
@@ -18,6 +20,7 @@ namespace SpatialAnchor
         protected void OnEnable()
         {
             _onButton = false;
+            layerMask = 1 << LayerMask.NameToLayer("UI");
 
             ovrCameraRig = FindObjectOfType<OVRCameraRig>();
             rightController = ovrCameraRig.rightControllerAnchor;
@@ -33,7 +36,7 @@ namespace SpatialAnchor
         {
             Ray castRay = new Ray(rightController.position, rightController.forward);
 
-            if (Physics.Raycast(castRay, out hit))
+            if (Physics.Raycast(castRay, out hit, 4f, layerMask))
             {
                 transform.position = hit.point;
                 if (hit.collider.gameObject.CompareTag("Button"))

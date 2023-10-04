@@ -7,6 +7,8 @@ namespace SpatialAnchor
 {
     public class CreateRoom : MonoBehaviour
     {
+        [SerializeField] CreateFurniture createFurniture;
+
         public List<Vector3> corners;
         public List<GameObject> childObj;
 
@@ -69,7 +71,6 @@ namespace SpatialAnchor
                 }
                 else
                 {
-                    CreateFurniture createFurniture = FindFirstObjectByType<CreateFurniture>();
                     createFurniture.gameObject.SetActive(true);
                     gameObject.SetActive(false);
                 }
