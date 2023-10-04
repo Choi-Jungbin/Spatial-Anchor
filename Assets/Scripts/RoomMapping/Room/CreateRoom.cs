@@ -16,6 +16,9 @@ namespace SpatialAnchor
         public GameObject Ceiling { get; set; }
         public List<GameObject> Walls { get; set; }
 
+        public Material ceilingMaterial;
+        public Material floorMaterial;
+
         public float RoomHeight
         {
             get
@@ -58,22 +61,14 @@ namespace SpatialAnchor
         public void ChildTriggered(int child, bool redo = false)
         {
             childObj[child].SetActive(false);
-            if (child < childObj.Count-1)
+            if (redo)
+            {
+                DestroyRoom();
+                childObj[0].SetActive(true);
+            }
+            else
             {
                 childObj[child + 1].SetActive(true);
-            }
-            else if(child == childObj.Count-1)
-            {
-                if (redo)
-                {
-                    DestroyRoom();
-                    childObj[0].SetActive(true);
-                }
-                else
-                {
-                    createFurniture.gameObject.SetActive(true);
-                    gameObject.SetActive(false);
-                }
             }
         }
     }

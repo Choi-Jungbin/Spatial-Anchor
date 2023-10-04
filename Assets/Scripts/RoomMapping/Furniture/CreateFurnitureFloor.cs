@@ -39,13 +39,23 @@ namespace SpatialAnchor
 
             if (Physics.Raycast(castRay, out hit))
             {
-                _onFloor = (hit.collider.gameObject == room.Floor);
-                point.SetActive(hit.collider.gameObject == room.Floor);
+                if(hit.collider.gameObject == room.Floor)
+                {
+                    _onFloor = true;
+                    point.SetActive(true);
+                }
+                else
+                {
+                    _onFloor = false;
+                    point.SetActive(false);
+                }
+                transform.position = hit.point;
             }
             else
             {
                 _onFloor = false;
                 point.SetActive(false);
+                transform.position = castRay.origin + rightController.forward * 4f;
             }
 
             //position (force to floor):
@@ -54,7 +64,6 @@ namespace SpatialAnchor
             {
                 position.y = RoomAnchor.Instance.transform.position.y;
             }
-            transform.position = position;
             point.transform.position = transform.position;
             rayRenderer.SetPosition(0, castRay.origin);
             rayRenderer.SetPosition(1, transform.position);
