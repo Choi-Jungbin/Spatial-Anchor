@@ -20,7 +20,7 @@ namespace SpatialAnchor
         private OVRCameraRig ovrCameraRig;
         private Transform rightController;
 
-        void Awake()
+        void OnEnable()
         {
             _onTop = false;
 

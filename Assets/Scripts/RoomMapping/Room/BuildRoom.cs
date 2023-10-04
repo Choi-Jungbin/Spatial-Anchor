@@ -1,5 +1,6 @@
 using System.Collections;
 using System.Collections.Generic;
+using System.Linq;
 using UnityEngine;
 
 namespace SpatialAnchor
@@ -154,31 +155,81 @@ namespace SpatialAnchor
             GameObject ceiling = new GameObject("(Ceiling)");
             GameObject floor = new GameObject("(Floor)");
             ceiling.transform.SetParent(parent.transform);
+            ceiling.transform.Rotate(Vector3.forward * 180);
             floor.transform.SetParent(parent.transform);
 
             Mesh ceilingMesh = new Mesh();
             Mesh floorMesh = new Mesh();
 
+            //get all local points:
             List<Vector3> ceilingVerts3D = new List<Vector3>();
+            List<Vector2> ceilingVerts2D = new List<Vector2>();
             List<Vector3> floorVerts3D = new List<Vector3>();
-            foreach (Vector3 corner in parent.corners)
+            List<Vector2> floorVerts2D = new List<Vector2>();
+            for (int i = 0; i < parent.corners.Count - 1; i++)
             {
-                // Assuming your corners are in local space, transform them to world space
-                Vector3 cornerWorldPosition = parent.transform.TransformPoint(corner);
-                // Set the vertices in world space
-                ceilingVerts3D.Add(cornerWorldPosition);
+                //ceiling:
+                Vector3 ceilingVert = ceiling.transform.InverseTransformPoint(parent.transform.TransformPoint(parent.corners[i]));
+                ceilingVerts3D.Add(ceilingVert);
+                ceilingVerts2D.Add(new Vector2(ceilingVert.x, ceilingVert.z));
 
-                cornerWorldPosition.y = RoomAnchor.Instance.transform.position.y;
-                floorVerts3D.Add(cornerWorldPosition);
+                //floor:
+                Vector3 floorVert = floor.transform.InverseTransformPoint(parent.transform.TransformPoint(parent.corners[i]));
+                floorVerts3D.Add(floorVert);
+                floorVerts2D.Add(new Vector2(floorVert.x, floorVert.z));
             }
 
             //set vers:
             ceilingMesh.vertices = ceilingVerts3D.ToArray();
             floorMesh.vertices = floorVerts3D.ToArray();
 
+            //triangles:
+            int[] ceilingTriangles = new Triangulator(ceilingVerts2D.ToArray()).Triangulate();
+            int[] floorTriangles = new Triangulator(floorVerts2D.ToArray()).Triangulate();
+            if (_windingDirection == 1)
+            {
+                ceilingTriangles.Reverse();
+            }
+            else
+            {
+                floorTriangles.Reverse();
+            }
+            ceilingMesh.triangles = ceilingTriangles;
+            floorMesh.triangles = floorTriangles;
+
+            //uvs:
+            Vector2[] uvs = new Vector2[floorVerts2D.Count];
+            for (int i = 0; i < uvs.Length; i++)
+            {
+                uvs[i] = new Vector2(floorVerts2D[i].x, floorVerts2D[i].y);
+            }
+            ceilingMesh.uv = uvs;
+            floorMesh.uv = uvs;
+
             // rendering components:
             ceiling.AddComponent<MeshFilter>().mesh = ceilingMesh;
             floor.AddComponent<MeshFilter>().mesh = floorMesh;
+
+            // materials:
+            MeshRenderer ceilingRenderer = ceiling.AddComponent<MeshRenderer>();
+            if (parent.ceilingMaterial)
+            {
+                ceilingRenderer.material = parent.ceilingMaterial;
+            }
+            else
+            {
+                ceilingRenderer.enabled = false;
+            }
+
+            MeshRenderer floorRenderer = floor.AddComponent<MeshRenderer>();
+            if (parent.floorMaterial)
+            {
+                floorRenderer.material = parent.floorMaterial;
+            }
+            else
+            {
+                floorRenderer.enabled = false;
+            }
 
             //calculate:
             ceilingMesh.RecalculateNormals();

@@ -4,68 +4,66 @@ using UnityEngine;
 
 namespace SpatialAnchor
 {
-    public class CreateFloor : MonoBehaviour
+    public class CreateFurnitureFloor : MonoBehaviour
     {
-        [SerializeField] CreateRoom parent;
+        [SerializeField] CreateRoom room;
+        [SerializeField] CreateFurniture parent;
         [SerializeField] GameObject pointPrefab;
         [SerializeField] GameObject rayPrefab;
 
         private bool _onFloor;
-        private float _maxCastDistance = 6f;
-        private Vector3 roomAnchor;
+        private float _lerpSpeed = 3.5f;
         private OVRCameraRig ovrCameraRig;
         private Transform rightController;
-        private Plane floor;
         private GameObject point;
         private GameObject ray;
         private LineRenderer rayRenderer;
 
-        void Awake()
+        void OnEnable()
         {
             _onFloor = false;
 
-            floor = new Plane(Vector3.up, RoomAnchor.Instance.transform.position);
-
             ovrCameraRig = FindObjectOfType<OVRCameraRig>();
             rightController = ovrCameraRig.rightControllerAnchor;
-            point = Instantiate(pointPrefab, transform.position, transform.rotation);
 
+            point = Instantiate(pointPrefab, transform.position, transform.rotation);
             ray = Instantiate(rayPrefab, transform.position, Quaternion.identity);
             rayRenderer = ray.GetComponent<LineRenderer>();
-            rayRenderer.SetPosition(0, transform.position);
-            rayRenderer.SetPosition(1, transform.position);
         }
 
         // Update is called once per frame
         void Update()
         {
-            float castDistance;
             Ray castRay = new Ray(rightController.position, rightController.forward);
+            RaycastHit hit;
 
-            if (floor.Raycast(castRay, out castDistance))
+            if (Physics.Raycast(castRay, out hit))
             {
-                _onFloor = true;
-                point.SetActive(true);
+                if(hit.collider.gameObject == room.Floor)
+                {
+                    _onFloor = true;
+                    point.SetActive(true);
+                }
+                else
+                {
+                    _onFloor = false;
+                    point.SetActive(false);
+                }
+                transform.position = hit.point;
             }
             else
             {
                 _onFloor = false;
                 point.SetActive(false);
-            }
-
-            //clamp:
-            if (castDistance <= 0 || castDistance > _maxCastDistance)
-            {
-                castDistance = _maxCastDistance;
+                transform.position = castRay.origin + rightController.forward * 4f;
             }
 
             //position (force to floor):
-            Vector3 position = castRay.GetPoint(castDistance);
+            Vector3 position = hit.point;
             if (_onFloor)
             {
-                position.y = roomAnchor.y;
+                position.y = RoomAnchor.Instance.transform.position.y;
             }
-            transform.position = position;
             point.transform.position = transform.position;
             rayRenderer.SetPosition(0, castRay.origin);
             rayRenderer.SetPosition(1, transform.position);
@@ -74,12 +72,12 @@ namespace SpatialAnchor
             if (_onFloor)
             {
                 Vector3 flatForward = Vector3.ProjectOnPlane(rightController.forward, Vector3.up);
-                transform.rotation = Quaternion.LookRotation(flatForward);
+                transform.rotation = Quaternion.Slerp(transform.rotation, Quaternion.LookRotation(flatForward), Time.deltaTime * _lerpSpeed);
             }
             else
             {
                 Quaternion rotation = Quaternion.LookRotation(rightController.forward);
-                transform.rotation = rotation;
+                transform.rotation = Quaternion.Slerp(transform.rotation, rotation, Time.deltaTime * _lerpSpeed);
             }
 
             if (OVRInput.GetDown(OVRInput.Button.PrimaryIndexTrigger, OVRInput.Controller.RTouch))

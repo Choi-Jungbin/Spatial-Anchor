@@ -10,7 +10,7 @@ namespace SpatialAnchor
         public List<GameObject> childObj;
         public List<GameObject> Furniture { get; set; }
 
-        void Awake()
+        void OnEnable()
         {
             childObj = new List<GameObject>();
             foreach (Transform child in transform)
@@ -33,11 +33,11 @@ namespace SpatialAnchor
             }
             else
             {
-                if (child < childObj.Count)
+                if (child < childObj.Count-1)
                 {
                     childObj[child + 1].SetActive(true);
                 }
-                else
+                else if (child == childObj.Count - 1)
                 {
                     childObj[0].SetActive(true);
                 }

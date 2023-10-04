@@ -18,8 +18,10 @@ namespace SpatialAnchor
         private OVRCameraRig ovrCameraRig;
         private Transform rightController;
 
-        void Awake()
+        void OnEnable()
         {
+            _onCeiling = false;
+
             position = floor.transform.position;
             transform.position = position;
             transform.rotation = floor.transform.rotation;
@@ -32,8 +34,6 @@ namespace SpatialAnchor
 
             ovrCameraRig = FindObjectOfType<OVRCameraRig>();
             rightController = ovrCameraRig.rightControllerAnchor;
-
-            _onCeiling = false;
         }
 
         // Update is called once per frame

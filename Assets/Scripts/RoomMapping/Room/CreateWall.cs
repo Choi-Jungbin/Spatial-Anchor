@@ -23,7 +23,7 @@ namespace SpatialAnchor
         private OVRCameraRig ovrCameraRig;
         private Transform rightController;
 
-        void Awake()
+        void OnEnable()
         {
             _onCeiling = false;
             corners = new List<Vector3>();

@@ -7,12 +7,17 @@ namespace SpatialAnchor
 {
     public class CreateRoom : MonoBehaviour
     {
+        [SerializeField] CreateFurniture createFurniture;
+
         public List<Vector3> corners;
         public List<GameObject> childObj;
 
         public GameObject Floor { get; set; }
         public GameObject Ceiling { get; set; }
         public List<GameObject> Walls { get; set; }
+
+        public Material ceilingMaterial;
+        public Material floorMaterial;
 
         public float RoomHeight
         {
@@ -37,17 +42,33 @@ namespace SpatialAnchor
             childObj[0].SetActive(true);
         }
 
-        public void ChildTriggered(int child)
+        public void DestroyRoom()
+        {
+            //sets:
+            corners = new List<Vector3>();
+
+            //destroy:
+            Destroy(Ceiling);
+            Destroy(Floor);
+            foreach (var wall in Walls)
+            {
+                Destroy(wall);
+            }
+
+            Walls = new List<GameObject>();
+        }
+
+        public void ChildTriggered(int child, bool redo = false)
         {
             childObj[child].SetActive(false);
-            if (child < childObj.Count)
+            if (redo)
             {
-                childObj[child + 1].SetActive(true);
+                DestroyRoom();
+                childObj[0].SetActive(true);
             }
             else
             {
-                CreateFurniture createFurniture = FindFirstObjectByType<CreateFurniture>();
-                createFurniture.gameObject.SetActive(true);
+                childObj[child + 1].SetActive(true);
             }
         }
     }
