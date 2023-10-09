@@ -147,7 +147,7 @@ namespace SpatialAnchor
 
                 walls.Add(wall);
             }
-            parent.Walls = walls;
+            CreateRoom.Walls = walls;
         }
 
         private void BuildHorizontalSurfaces()
@@ -244,8 +244,8 @@ namespace SpatialAnchor
             //push floor down:
             floor.transform.Translate(Vector3.down * parent.RoomHeight);
 
-            parent.Ceiling = ceiling;
-            parent.Floor = floor;
+            CreateRoom.Ceiling = ceiling;
+            CreateRoom.Floor = floor;
         }
     }
 }

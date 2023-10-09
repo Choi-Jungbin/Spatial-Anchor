@@ -12,9 +12,9 @@ namespace SpatialAnchor
         public List<Vector3> corners;
         public List<GameObject> childObj;
 
-        public GameObject Floor { get; set; }
-        public GameObject Ceiling { get; set; }
-        public List<GameObject> Walls { get; set; }
+        public static GameObject Floor { get; set; }
+        public static GameObject Ceiling { get; set; }
+        public static List<GameObject> Walls { get; set; }
 
         public Material ceilingMaterial;
         public Material floorMaterial;
