@@ -7,6 +7,8 @@ namespace SpatialAnchor
 {
     public class CreateFurniture : MonoBehaviour
     {
+        [SerializeField] CreateRoom parent;
+
         public List<GameObject> childObj;
         public List<GameObject> Furniture { get; set; }
 
@@ -30,6 +32,7 @@ namespace SpatialAnchor
             if (redo)
             {
                 SceneManager.LoadScene("FPSGame");
+                DontDestroyOnLoad(parent);
             }
             else
             {

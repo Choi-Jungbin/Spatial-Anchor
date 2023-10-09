@@ -39,7 +39,7 @@ namespace SpatialAnchor
 
             if (Physics.Raycast(castRay, out hit))
             {
-                if(hit.collider.gameObject == room.Floor)
+                if(hit.collider.gameObject == CreateRoom.Floor)
                 {
                     _onFloor = true;
                     point.SetActive(true);
