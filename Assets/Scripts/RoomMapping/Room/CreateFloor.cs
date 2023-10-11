@@ -12,7 +12,6 @@ namespace SpatialAnchor
 
         private bool _onFloor;
         private float _maxCastDistance = 6f;
-        private Vector3 roomAnchor;
         private OVRCameraRig ovrCameraRig;
         private Transform rightController;
         private Plane floor;
@@ -63,7 +62,7 @@ namespace SpatialAnchor
             Vector3 position = castRay.GetPoint(castDistance);
             if (_onFloor)
             {
-                position.y = roomAnchor.y;
+                position.y = RoomAnchor.Instance.transform.position.y;
             }
             transform.position = position;
             point.transform.position = transform.position;

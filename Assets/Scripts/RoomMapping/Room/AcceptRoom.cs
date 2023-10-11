@@ -9,36 +9,15 @@ namespace SpatialAnchor
         [SerializeField] CreateRoom parent;
         [SerializeField] LineRenderer line;
 
-        // Update is called once per frame
-        new void Update()
-        {
-            base.Update();
-
-            if (OVRInput.GetDown(OVRInput.Button.PrimaryIndexTrigger, OVRInput.Controller.RTouch))
-            {
-                if (_onButton)
-                {
-                    Destroy(ray);
-                    line.gameObject.SetActive(false);
-                    if (hit.collider.gameObject.name == "Yes")
-                    {
-                        Accept();
-                    }
-                    else if (hit.collider.gameObject.name == "No")
-                    {
-                        Reject();
-                    }
-                }
-            }
-        }
-
         public void Accept()
         {
+            line.gameObject.SetActive(false);
             parent.ChildTriggered(5);
         }
 
         public void Reject()
         {
+            line.gameObject.SetActive(false);
             parent.ChildTriggered(5, true);
         }
     }

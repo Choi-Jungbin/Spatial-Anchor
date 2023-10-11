@@ -58,6 +58,21 @@ namespace SpatialAnchor
             Walls = new List<GameObject>();
         }
 
+        public void SaveRoom()
+        {
+            string roomData = "";
+
+            for(int i = 0; i < corners.Count; i++)
+            {
+                roomData += $"{corners[i].x},{corners[i].y},{corners[i].z}";
+                if(i < corners.Count - 1)
+                {
+                    roomData += "|";
+                }
+            }
+            PlayerPrefs.SetString("RoomData", roomData);
+        }
+
         public void ChildTriggered(int child, bool redo = false)
         {
             childObj[child].SetActive(false);
@@ -68,7 +83,16 @@ namespace SpatialAnchor
             }
             else
             {
-                childObj[child + 1].SetActive(true);
+                if (child < childObj.Count - 1)
+                {
+                    childObj[child + 1].SetActive(true);
+                }
+                else if (child == childObj.Count - 1)
+                {
+                    SaveRoom();
+                    createFurniture.gameObject.SetActive(true);
+                    gameObject.SetActive(false);
+                }
             }
         }
     }

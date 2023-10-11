@@ -1,6 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using TMPro;
 
 namespace SpatialAnchor
 {
@@ -10,6 +11,7 @@ namespace SpatialAnchor
         [SerializeField] CreateFurnitureSide topAnchor;
         [SerializeField] GameObject pointPrefab;
         [SerializeField] GameObject linePrefab;
+        [SerializeField] GameObject rayPrefab;
 
         public List<Vector3> edges;
 
@@ -24,11 +26,12 @@ namespace SpatialAnchor
         private LineRenderer lineRenderer;
         private OVRCameraRig ovrCameraRig;
         private Transform rightController;
+        private GameObject ray;
+        private LineRenderer rayRenderer;
 
         void OnEnable()
         {
             _onTop = false;
-            edges = new List<Vector3>();
 
             top = new Plane(Vector3.up, topAnchor.transform.position);
             startPoint = topAnchor.transform.position;
@@ -48,6 +51,11 @@ namespace SpatialAnchor
 
             ovrCameraRig = FindObjectOfType<OVRCameraRig>();
             rightController = ovrCameraRig.rightControllerAnchor;
+
+            ray = Instantiate(rayPrefab, transform.position, Quaternion.identity);
+            rayRenderer = ray.GetComponent<LineRenderer>();
+            rayRenderer.SetPosition(0, transform.position);
+            rayRenderer.SetPosition(1, transform.position);
         }
 
         // Update is called once per frame
@@ -62,8 +70,8 @@ namespace SpatialAnchor
                 {
                     _onTop = true;
                 }
+                anchor.SetActive(true);
                 position = castRay.GetPoint(castDistance);
-                transform.position = position;
                 anchor.transform.position = position;
 
                 lineX = lineRenderer.GetPosition(1);
@@ -80,7 +88,11 @@ namespace SpatialAnchor
                 {
                     _onTop = false;
                 }
+                anchor.SetActive(false);
             }
+            transform.position = position;
+            rayRenderer.SetPosition(0, castRay.origin);
+            rayRenderer.SetPosition(1, transform.position);
 
             if (OVRInput.GetDown(OVRInput.Button.PrimaryIndexTrigger, OVRInput.Controller.RTouch))
             {
@@ -88,9 +100,9 @@ namespace SpatialAnchor
                 {
                     edges = new List<Vector3> { startPoint, lineX, position, lineY };
                     float bottom = RoomAnchor.Instance.transform.position.y;
-                    for (int i = 4; i < edges.Count + 4; i++)
+                    for (int i = 0; i < 4; i++)
                     {
-                        edges[i] = new Vector3(edges[i].x, bottom, edges[i].z);
+                        edges.Add(new Vector3(edges[i].x, bottom, edges[i].z));
                     }
                     Destroy(anchor);
                     Destroy(line);
