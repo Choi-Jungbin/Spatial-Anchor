@@ -206,6 +206,18 @@ PrefabInstance:
       propertyPath: m_Name
       value: Banana Man@Pistol Idle
       objectReference: {fileID: 0}
+    - target: {fileID: 8879528566716807029, guid: 1a1fe703296865c4e8be535168e312f0, type: 3}
+      propertyPath: m_LocalPosition.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 8879528566716807029, guid: 1a1fe703296865c4e8be535168e312f0, type: 3}
+      propertyPath: m_LocalPosition.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 8879528566716807029, guid: 1a1fe703296865c4e8be535168e312f0, type: 3}
+      propertyPath: m_LocalPosition.z
+      value: 0
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
