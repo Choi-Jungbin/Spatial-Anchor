@@ -25,6 +25,14 @@ public class Enemy : MonoBehaviour
         InvokeRepeating("setAnimator", 0, 5);
     }
 
+    private void OnCollisionEnter(Collision collision)
+    {
+        if (collision.gameObject.CompareTag("bullet_head"))
+        {
+            animator.SetTrigger("bullet");
+        }
+    }
+
     void setAnimator()
     {
         if (animator.GetBool("act1"))
