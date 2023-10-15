@@ -10,10 +10,11 @@ namespace SpatialAnchor
         [SerializeField] CreateRoom room;
 
         public List<GameObject> childObj;
-        public List<GameObject> Furniture { get; set; }
+        public List<List<Vector3>> Furniture;
 
         void OnEnable()
         {
+            Furniture = new List<List<Vector3>>();
             childObj = new List<GameObject>();
             foreach (Transform child in transform)
             {

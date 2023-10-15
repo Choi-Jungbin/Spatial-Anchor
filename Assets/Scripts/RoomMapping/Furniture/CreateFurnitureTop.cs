@@ -12,15 +12,14 @@ namespace SpatialAnchor
         [SerializeField] GameObject pointPrefab;
         [SerializeField] GameObject linePrefab;
         [SerializeField] GameObject rayPrefab;
+        [SerializeField] TextMeshPro text;
 
         public List<Vector3> edges;
 
         private bool _onTop;
+        private bool _check;
         private Plane top;
-        private Vector3 startPoint;
         private Vector3 position;
-        private Vector3 lineX;
-        private Vector3 lineY;
         private GameObject anchor;
         private GameObject line;
         private LineRenderer lineRenderer;
@@ -32,22 +31,17 @@ namespace SpatialAnchor
         void OnEnable()
         {
             _onTop = false;
+            _check = false;
 
             top = new Plane(Vector3.up, topAnchor.transform.position);
-            startPoint = topAnchor.transform.position;
-            position = startPoint;
-            lineX = startPoint;
-            lineY = startPoint;
+            position = topAnchor.transform.position;
+            edges = new List<Vector3> { position, position, position, position };
 
-            anchor = Instantiate(pointPrefab, startPoint, Quaternion.identity);
+            anchor = Instantiate(pointPrefab, edges[0], Quaternion.identity);
 
-            line = Instantiate(linePrefab, startPoint, Quaternion.identity);
+            line = Instantiate(linePrefab, edges[0], Quaternion.identity);
             lineRenderer = line.GetComponent<LineRenderer>();
-            lineRenderer.SetPosition(0, startPoint);
-            lineRenderer.SetPosition(1, startPoint);
-            lineRenderer.SetPosition(2, startPoint);
-            lineRenderer.SetPosition(3, startPoint);
-            lineRenderer.SetPosition(4, startPoint);
+            lineRenderer.SetPosition(0, edges[0]);
 
             ovrCameraRig = FindObjectOfType<OVRCameraRig>();
             rightController = ovrCameraRig.rightControllerAnchor;
@@ -56,6 +50,13 @@ namespace SpatialAnchor
             rayRenderer = ray.GetComponent<LineRenderer>();
             rayRenderer.SetPosition(0, transform.position);
             rayRenderer.SetPosition(1, transform.position);
+        }
+
+        private void OnDisable()
+        {
+            Destroy(anchor);
+            Destroy(line);
+            Destroy(ray);
         }
 
         // Update is called once per frame
@@ -72,15 +73,7 @@ namespace SpatialAnchor
                 }
                 anchor.SetActive(true);
                 position = castRay.GetPoint(castDistance);
-                anchor.transform.position = position;
 
-                lineX = lineRenderer.GetPosition(1);
-                lineX.x = position.x;
-                lineY = lineRenderer.GetPosition(3);
-                lineY.x = position.y;
-                lineRenderer.SetPosition(1, line.transform.InverseTransformPoint(lineX));
-                lineRenderer.SetPosition(2, line.transform.InverseTransformPoint(position));
-                lineRenderer.SetPosition(3, line.transform.InverseTransformPoint(lineY));
             }
             else
             {
@@ -90,24 +83,78 @@ namespace SpatialAnchor
                 }
                 anchor.SetActive(false);
             }
+
+            if (_check)
+            {
+                Vector3 direction = (edges[1] - edges[0]).normalized;
+
+                // '위' 방향과 direction 사이의 외적으로 '수직' 방향 계산
+                Vector3 perpendicularDirection = Vector3.Cross(Vector3.up, direction).normalized;
+
+                // position에서 edges[1]까지의 거리 계산
+                float distance = Vector3.Distance(position, edges[1]);
+
+                // edges[2] 업데이트: edges[1]에서 '수직' 방향으로 거리만큼 이동한 위치
+                edges[2] = edges[1] + perpendicularDirection * distance;
+
+                anchor.transform.position = edges[2];
+
+                Vector3 vector1to2 = edges[1] - edges[0];
+                Vector3 vector2to3 = edges[2] - edges[1];
+
+                // 위의 두 벡터를 합함
+                Vector3 diagonalVector = vector1to2 + vector2to3;
+                edges[3] = edges[0] + diagonalVector;
+            }
+            else
+            {
+                anchor.transform.position = position;
+            }
             transform.position = position;
             rayRenderer.SetPosition(0, castRay.origin);
             rayRenderer.SetPosition(1, transform.position);
+            UpdateLine();
+            text.text = edges[2].ToString() + ", " + edges[3].ToString();
 
             if (OVRInput.GetDown(OVRInput.Button.PrimaryIndexTrigger, OVRInput.Controller.RTouch))
             {
                 if (_onTop)
                 {
-                    edges = new List<Vector3> { startPoint, lineX, position, lineY };
-                    float bottom = RoomAnchor.Instance.transform.position.y;
-                    for (int i = 0; i < 4; i++)
+                    if (_check)
                     {
-                        edges.Add(new Vector3(edges[i].x, bottom, edges[i].z));
+                        float bottom = RoomAnchor.Instance.transform.position.y;
+                        for (int i = 0; i < 4; i++)
+                        {
+                            edges.Add(new Vector3(edges[i].x, bottom, edges[i].z));
+                        }
+                        
+                        parent.ChildTriggered(3);
                     }
-                    Destroy(anchor);
-                    Destroy(line);
-                    parent.ChildTriggered(3);
+                    else
+                    {
+                        _check = true;
+                        edges[2] = position;
+                    }
                 }
+            }
+        }
+
+        private void UpdateLine()
+        {
+            if (_check)
+            {
+                lineRenderer.positionCount = 5;
+
+                for (int i = 0; i < 4; i++)
+                {
+                    lineRenderer.SetPosition(i, edges[i]);
+                }
+                lineRenderer.SetPosition(4, edges[0]);
+            }
+            else
+            {
+                lineRenderer.positionCount = 2;
+                lineRenderer.SetPosition(1, position);
             }
         }
     }
