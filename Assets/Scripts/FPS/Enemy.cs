@@ -2,23 +2,35 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class Enemy : MonoBehaviour
+namespace SpatialAnchor
 {
-    private Rigidbody[] ragdollRigidbodies;
-    private Animator animator;
-
-    // Start is called before the first frame update
-    void Awake()
+    public class Enemy : MonoBehaviour
     {
-        ragdollRigidbodies = GetComponentsInChildren<Rigidbody>();
-        animator = gameObject.GetComponent<Animator>();
-    }
+        [SerializeField] EnemyShoot shooter;
 
-    private void OnCollisionEnter(Collision collision)
-    {
-        if (collision.gameObject.CompareTag("bullet_head"))
+        public bool alive;
+
+        private Animator animator;
+        private OVRCameraRig ovrCameraRig;
+        private EnemyManager enemyManager;
+
+        // Start is called before the first frame update
+        void Awake()
         {
-            animator.SetTrigger("bullet");
+            alive = true;
+            animator = gameObject.GetComponent<Animator>();
+            ovrCameraRig = FindObjectOfType<OVRCameraRig>();
+            enemyManager = FindObjectOfType<EnemyManager>();
+        }
+
+        private void Update()
+        {
+            transform.forward = Vector3.ProjectOnPlane((ovrCameraRig.transform.position - transform.position), Vector3.up).normalized;
+        }
+
+        void Shoot()
+        {
+            shooter.Shoot();
         }
     }
 }

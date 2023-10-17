@@ -1,14 +1,9 @@
-﻿using System.Collections;
+using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-[AddComponentMenu("Nokobot/Modern Guns/Simple Shoot")]
-public class SimpleShoot : MonoBehaviour
+public class EnemyShoot : MonoBehaviour
 {
-    //ammo info
-    public int maxammo = 7;
-    public int currentammo;
-
     [Header("Prefab Refrences")]
     public GameObject bulletPrefab;
     public GameObject casingPrefab;
@@ -27,8 +22,6 @@ public class SimpleShoot : MonoBehaviour
     [Header("Sounds")]
     [SerializeField] private AudioSource source;
     [SerializeField] private AudioClip fire;
-    [SerializeField] private AudioClip reload;
-    [SerializeField] private AudioClip noAmmo;
 
 
     void Start()
@@ -38,48 +31,11 @@ public class SimpleShoot : MonoBehaviour
 
         if (gunAnimator == null)
             gunAnimator = GetComponentInChildren<Animator>();
-
-        Reload();
     }
-
-    void Reload()
-    {
-        currentammo = maxammo;
-        source.PlayOneShot(reload);
-    }
-
-    void Update()
-    {
-        ////If you want a different input, change it here
-        //if (Input.GetButtonDown("Fire1"))
-        //{
-        //    //Calls animation on the gun that has the relevant animation events that will fire
-        //    gunAnimator.SetTrigger("Fire");
-        //}
-
-        if (OVRInput.GetDown(OVRInput.Button.PrimaryIndexTrigger, OVRInput.Controller.RTouch))
-        {
-            if (currentammo > 0)
-            {
-                GetComponent<Animator>().SetTrigger("Fire");
-            }
-            else
-            {
-                source.PlayOneShot(noAmmo);
-            }
-        }
-
-        if (Vector3.Angle(transform.up, Vector3.up) > 100 && currentammo < maxammo)
-        {
-            Reload();
-        }
-    }
-
 
     //This function creates the bullet behavior
-    void Shoot()
+    public void Shoot()
     {
-        currentammo--;
         source.PlayOneShot(fire);
 
         if (muzzleFlashPrefab)
@@ -120,5 +76,4 @@ public class SimpleShoot : MonoBehaviour
         //Destroy casing after X seconds
         Destroy(tempCasing, destroyTimer);
     }
-
 }
