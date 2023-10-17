@@ -8,12 +8,12 @@ namespace SpatialAnchor
     public class AcceptFurniture : ClickButton
     {
         [SerializeField] CreateFurniture parent;
-        [SerializeField] BuildFurniture furniture;
+        [SerializeField] BuildFurniture build;
 
         public void Accept()
         {
-            parent.Furniture.Add(furniture.edges);
-            Destroy(furniture.Furniture);
+            parent.Furniture.Add(build.edges);
+            build.furnitures.Add(build.furniture);
             parent.ChildTriggered(5);
         }
 

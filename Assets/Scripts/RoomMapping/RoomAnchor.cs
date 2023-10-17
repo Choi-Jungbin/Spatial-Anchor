@@ -32,7 +32,6 @@ namespace SpatialAnchor
 
         private static RoomAnchor _instance;
 
-        
         void Awake()
         {
             StartCoroutine(SetupPlayArea());

@@ -60,17 +60,14 @@ namespace SpatialAnchor
 
         public void SaveRoom()
         {
-            string roomData = "";
+            LoadMap loadMap = FindAnyObjectByType<LoadMap>();
 
             for(int i = 0; i < corners.Count; i++)
             {
-                roomData += $"{corners[i].x},{corners[i].y},{corners[i].z}";
-                if(i < corners.Count - 1)
-                {
-                    roomData += "|";
-                }
+                corners[i] = loadMap.transform.InverseTransformPoint(corners[i]);
             }
-            PlayerPrefs.SetString("RoomData", roomData);
+
+            loadMap.CeilingCorners = corners;
         }
 
         public void ChildTriggered(int child, bool redo = false)
