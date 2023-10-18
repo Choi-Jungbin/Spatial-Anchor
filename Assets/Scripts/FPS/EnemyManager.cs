@@ -14,12 +14,14 @@ namespace SpatialAnchor
         public int kill;
 
         private OVRCameraRig ovrCameraRig;
+        private int count;
 
         void Awake()
         {
             ovrCameraRig = FindObjectOfType<OVRCameraRig>();
             enemys = new List<GameObject>();
             kill = 0;
+            count = 0;
 
             for (int i = 0; i < numberOfEnemy; i++)
             {

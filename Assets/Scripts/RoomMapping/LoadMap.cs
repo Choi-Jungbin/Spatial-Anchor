@@ -9,14 +9,18 @@ namespace SpatialAnchor
     {
         [SerializeField] Material ceilingMaterial;
         [SerializeField] Material floorMaterial;
+        [SerializeField] Material furnitureMaterial;
 
         public List<Vector3> CeilingCorners;
+        public List<List<Vector3>> FurnitureEdges;
+
         private Vector3 _ceilingCenter;
         private float _windingDirection;
 
         public GameObject Floor;
         public GameObject Ceiling;
         public List<GameObject> Walls;
+        public List<GameObject> Furnitures;
 
         public float RoomHeight
         {
@@ -32,6 +36,10 @@ namespace SpatialAnchor
             SetWindingDirection();
             BuildWalls();
             BuildHorizontalSurfaces();
+            for (int i = 0; i < FurnitureEdges.Count; i++)
+            {
+                BuildFurniture(FurnitureEdges[i]);
+            }
         }
 
         private void SetCeilingCenter()
@@ -219,6 +227,42 @@ namespace SpatialAnchor
 
             //push floor down:
             Floor.transform.Translate(Vector3.down * RoomHeight);
+        }
+
+        private void BuildFurniture(List<Vector3> edges)
+        {
+            // Calculate the center of the cube
+            Vector3 center = Vector3.zero;
+            foreach (Vector3 edge in edges)
+            {
+                center += edge;
+            }
+            center /= 8;
+
+            GameObject furniture = GameObject.CreatePrimitive(PrimitiveType.Cube);
+            furniture.transform.position = center;
+
+            Vector3 widthVector = edges[1] - edges[0];
+            Vector3 lengthVector = edges[2] - edges[1];
+            Vector3 heightVector = edges[4] - edges[0];
+
+            float width = Mathf.Abs(widthVector.magnitude);
+            float length = Mathf.Abs(lengthVector.magnitude);
+            float height = Mathf.Abs(heightVector.magnitude);
+
+            furniture.transform.localScale = new Vector3(width, height, length);
+            furniture.transform.rotation = Quaternion.LookRotation(lengthVector, heightVector);
+
+            MeshRenderer furnitureRenderer = furniture.GetComponent<MeshRenderer>();
+            if (furnitureMaterial)
+            {
+                furnitureRenderer.material = furnitureMaterial;
+            }
+            else
+            {
+                furnitureRenderer.enabled = false;
+            }
+            Furnitures.Add(furniture);
         }
     }
 }

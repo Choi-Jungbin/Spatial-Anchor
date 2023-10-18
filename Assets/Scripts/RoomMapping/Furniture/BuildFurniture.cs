@@ -1,6 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using TMPro;
 
 namespace SpatialAnchor
 {
@@ -8,21 +9,15 @@ namespace SpatialAnchor
     {
         [SerializeField] CreateFurniture parent;
         [SerializeField] CreateFurnitureTop top;
+        [SerializeField] AcceptFurniture accept;
         [SerializeField] Material material;
+        [SerializeField] TextMeshPro text;
 
-        public List<GameObject> furnitures;
-        public GameObject furniture;
-        public List<Vector3> edges;
-
-        private void Awake()
-        {
-            furnitures = new List<GameObject>();
-        }
+        private List<Vector3> edges;
 
         void OnEnable()
         {
             edges = top.edges;
-            furniture = new GameObject("Furniture");
 
             // Calculate the center of the cube
             Vector3 center = Vector3.zero;
@@ -32,7 +27,7 @@ namespace SpatialAnchor
             }
             center /= 8;
 
-            furniture = GameObject.CreatePrimitive(PrimitiveType.Cube);
+            GameObject furniture = GameObject.CreatePrimitive(PrimitiveType.Cube);
             furniture.transform.position = center;
 
             Vector3 widthVector = edges[1] - edges[0];
@@ -46,6 +41,11 @@ namespace SpatialAnchor
             furniture.transform.localScale = new Vector3(width, height, length);
             furniture.transform.rotation = Quaternion.LookRotation(lengthVector, heightVector);
             furniture.GetComponent<MeshRenderer>().material = material;
+
+            accept.edges = edges;
+            text.text = "edges";
+            accept.furniture = furniture;
+            text.text = "furniture";
 
             parent.ChildTriggered(4);
         }
