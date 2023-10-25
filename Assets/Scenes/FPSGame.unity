@@ -1436,8 +1436,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   shoot: {fileID: 690042128}
   enemyManager: {fileID: 754648726}
-  ammo: {fileID: 1513915647}
-  score: {fileID: 665072410}
+  ammo: 0
+  score: 0
 --- !u!1001 &1053853749
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -1579,6 +1579,7 @@ GameObject:
   - component: {fileID: 1301058081}
   - component: {fileID: 1301058080}
   - component: {fileID: 1301058083}
+  - component: {fileID: 1301058084}
   m_Layer: 5
   m_Name: Canvas
   m_TagString: Untagged
@@ -1682,6 +1683,21 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 35b44c4db8aaa6441a568dc3f946d312, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+--- !u!114 &1301058084
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1301058078}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: b1be93b9696066b4fac6accff0cc8f39, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  playManager: {fileID: 916289578}
+  ammo: {fileID: 1513915647}
+  score: {fileID: 665072410}
 --- !u!1 &1403478026
 GameObject:
   m_ObjectHideFlags: 0
