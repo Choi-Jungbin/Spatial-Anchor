@@ -29,6 +29,15 @@ namespace SpatialAnchor
             }
         }
 
+        void OnDisable()
+        {
+            foreach (GameObject enemy in enemys)
+            {
+                Destroy(enemy);
+            }
+            enemys.Clear();
+        }
+
         // Update is called once per frame
         void Update()
         {

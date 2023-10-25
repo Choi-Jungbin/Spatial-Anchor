@@ -6,14 +6,9 @@ namespace SpatialAnchor
 {
     public class GameOver : MonoBehaviour
     {
+        [SerializeField] PlayManager playManager;
 
         void Awake()
-        {
-
-        }
-
-        // Update is called once per frame
-        void Update()
         {
 
         }
@@ -22,7 +17,7 @@ namespace SpatialAnchor
         {
             if (col.CompareTag("BulletHead"))
             {
-
+                playManager.GameOver();
             }
         }
     }
