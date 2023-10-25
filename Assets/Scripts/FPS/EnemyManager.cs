@@ -16,7 +16,7 @@ namespace SpatialAnchor
         private OVRCameraRig ovrCameraRig;
         private int count;
 
-        void Awake()
+        void OnEnable()
         {
             ovrCameraRig = FindObjectOfType<OVRCameraRig>();
             enemys = new List<GameObject>();
