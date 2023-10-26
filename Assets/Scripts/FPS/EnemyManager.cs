@@ -16,7 +16,7 @@ namespace SpatialAnchor
         private OVRCameraRig ovrCameraRig;
         private int count;
 
-        void Awake()
+        void OnEnable()
         {
             ovrCameraRig = FindObjectOfType<OVRCameraRig>();
             enemys = new List<GameObject>();
@@ -27,6 +27,15 @@ namespace SpatialAnchor
             {
                 CreateEnemy();
             }
+        }
+
+        void OnDisable()
+        {
+            foreach (GameObject enemy in enemys)
+            {
+                Destroy(enemy);
+            }
+            enemys.Clear();
         }
 
         // Update is called once per frame

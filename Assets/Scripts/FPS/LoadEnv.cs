@@ -13,15 +13,13 @@ namespace SpatialAnchor
         private LoadMap loadMap;
         private NavMeshSurface surface;
 
-        private void Awake()
+        void Awake()
         {
             loadMap = FindAnyObjectByType<LoadMap>();
             loadMap.LoadPrevious();
 
             surface = gameObject.AddComponent<NavMeshSurface>();
             surface.BuildNavMesh();
-
-            enemyManager.gameObject.SetActive(true);
         }
     }
 }

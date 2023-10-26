@@ -8,20 +8,37 @@ namespace SpatialAnchor {
     {
         [SerializeField] SimpleShoot shoot;
         [SerializeField] EnemyManager enemyManager;
-        [SerializeField] TextMeshProUGUI ammo;
-        [SerializeField] TextMeshProUGUI score;
+        [SerializeField] GameObject gamePlay;
+        [SerializeField] GameObject gameOver;
+        [SerializeField] GameObject gun;
+
+        public int ammo;
+        public int score;
 
         void Awake()
         {
-            ammo.text = "0";
-            score.text = "0";
+            ammo = 0;
+            score = 0;
         }
 
         // Update is called once per frame
         void Update()
         {
-            ammo.text = shoot.currentammo.ToString();
-            score.text = enemyManager.kill.ToString();
+            ammo = shoot.currentammo;
+            score = enemyManager.kill;
+        }
+
+        public void GameOver()
+        {
+            gun.SetActive(false);
+            gamePlay.SetActive(false);
+            enemyManager.gameObject.SetActive(false);
+            gameOver.SetActive(true);
+        }
+
+        public void Quit()
+        {
+            Application.Quit();
         }
     }
 }
