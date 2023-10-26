@@ -10,6 +10,7 @@ namespace SpatialAnchor {
         [SerializeField] EnemyManager enemyManager;
         [SerializeField] GameObject gamePlay;
         [SerializeField] GameObject gameOver;
+        [SerializeField] GameObject gun;
 
         public int ammo;
         public int score;
@@ -29,6 +30,7 @@ namespace SpatialAnchor {
 
         public void GameOver()
         {
+            gun.SetActive(false);
             gamePlay.SetActive(false);
             enemyManager.gameObject.SetActive(false);
             gameOver.SetActive(true);
