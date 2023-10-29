@@ -1,6 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using TMPro;
 
 namespace SpatialAnchor
 {
@@ -17,7 +18,7 @@ namespace SpatialAnchor
         {
             if (col.CompareTag("BulletHead"))
             {
-                playManager.GameOver();
+                playManager.Shot();
             }
         }
     }
