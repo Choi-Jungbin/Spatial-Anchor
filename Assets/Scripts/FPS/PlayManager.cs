@@ -16,14 +16,14 @@ namespace SpatialAnchor {
         public int score;
 
         private int _maxShot = 2;
-        private int shot;
+        private int _shot;
         private List<Transform> damageEffects;
 
         void Awake()
         {
             ammo = 0;
             score = 0;
-            shot = 0;
+            _shot = 0;
 
             damageEffects = new List<Transform>();
             for (int i = 0; i < _maxShot; i++)
@@ -41,10 +41,10 @@ namespace SpatialAnchor {
 
         public void Shot()
         {
-            if(shot < _maxShot)
+            if(_shot < _maxShot)
             {
-                damageEffects[shot].gameObject.SetActive(true);
-                shot++;
+                damageEffects[_shot].gameObject.SetActive(true);
+                _shot++;
             }
             else
             {
@@ -54,6 +54,7 @@ namespace SpatialAnchor {
 
         void GameOver()
         {
+            _shot = 0;
             foreach(Transform effect in damageEffects)
             {
                 effect.gameObject.SetActive(false);
