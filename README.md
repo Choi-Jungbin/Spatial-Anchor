@@ -6,4 +6,4 @@ Oculus Quest2를 이용한 AR FPS 게임
 - spatial anchor로 업데이트 예정
 
 [![Video Label](http://img.youtube.com/vi/DblZmSpo3M8/0.jgp)]
-(https://youtube.be/DblZmSpo3M8)
+(https://youtu.be/DblZmSpo3M8)
